@@ -1,6 +1,7 @@
 import random
 import time
 
+from faker import Faker
 from flask import Flask, render_template, jsonify, url_for, request
 from celery import Celery
 
@@ -58,15 +59,16 @@ def task_status(task_id):
 @celery_app.task(bind=True)
 def copy_s3_files(self, files_count):
     # 模拟copy s3文件
+    fake = Faker()
     for i in range(files_count):
-        time.sleep(random.randint(1, 5))
+        # time.sleep(random.randint(1, 5))
+        time.sleep(random.random())
         meta = {
             'current': i + 1,
             'total': files_count,
-            'status': 'finish file {}'.format(i+1)
+            'status': '{}-{}.xlsx'.format(fake.name(), i + 1)
         }
         self.update_state(state='PROGRESS', meta=meta)
-    # 这个是必须的吗？
     return {'current': files_count, 'total': files_count, 'status': 'Task completed!', 'result': files_count}
 
 
