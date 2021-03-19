@@ -1,9 +1,8 @@
 ### About
 
-在复制许多s3文件时，可能要花很多时间，因此使用celery异步实现。  
+一个简单的Celery任务队列Demo，模拟以异步的方式复制大量S3文件，拿来简单改改就能缓存别的任务。
 
-同时借鉴http://www.pythondoc.com/flask-celery/first.html,
-在html页面实现异步任务进度条。
+同时借鉴[FlaskCelery](http://www.pythondoc.com/flask-celery/first.html)里的例子，在html页面展示任务进度条。
 
 ---
 
